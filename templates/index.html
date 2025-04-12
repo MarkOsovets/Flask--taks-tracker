@@ -1,0 +1,26 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<h1>Home page</h1>
+
+<a href="{{ url_for('add_task') }}">Add a new task</a>
+<h1>List tracker</h1>
+
+{% for task in tasks %}
+<div class="task">
+    <form method="POST" action="{{ url_for('checkbox', task_id = task.id)}}">
+        <input type="checkbox" name="is_completed" onChange="this.form.submit()" 
+               {% if task.is_completed %}checked{% endif %}>
+        <h4>
+            <a href="tasks/{{task.id}}">
+                {% if task.is_completed %}
+                <s>{{ task.title }}</s>
+                {% else %}
+                {{ task.title }}
+                {% endif %}
+            </a>
+        </h4>
+    </form>
+</div>
+{% endfor %}
+{% endblock %}

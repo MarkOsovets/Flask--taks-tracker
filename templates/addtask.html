@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+
+<h1>Add a new task</h1>
+<form action="/addtasks" method="post">
+    {{form.hidden_tag()}}
+    <p>{{form.name.label()}}{{form.name()}}
+    <p>{{form.description.label()}}{{form.description}}
+    <p>{{form.submit}}
+
+</form>
+{% endblock %}
